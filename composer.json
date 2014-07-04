@@ -1,0 +1,10 @@
+{
+    "name": "nickurt/blendle",
+    "description": "Blendle - PHP",
+    "keywords": ["nickurt", "blendle"],
+    "autoload": {
+        "psr-4": {
+            "Blendle\\": "src/Blendle"
+        }
+    }
+}
