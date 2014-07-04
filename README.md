@@ -1,6 +1,5 @@
 # Blendle #
-=======
-
+- - -
 ## Requirements
 
 * PHP 5.4+
