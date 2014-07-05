@@ -36,6 +36,37 @@ $request->setAuthorization($authorization);
 $response       =   $client->send($request);
 print_r($response->getUsername()); 
 ```
+### PopularRequest
+
+```php
+<?php
+require_once __DIR__.'/../vendor/autoload.php';
+
+$client     	= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+$response 		=	$client->send(new \Blendle\Request\PopularRequest());
+
+foreach($response->getItem() as $items) {
+	print_r($items->getTitle());
+}
+```
+
+### ItemRequest
+
+```php
+<?php
+require_once __DIR__.'/../vendor/autoload.php';
+
+$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+
+$item			=	new \Blendle\Model\Item();
+$item->setId('bnl-trn-20140705-3353927');
+
+$request		=	new \Blendle\Request\ItemRequest();
+$request->setItem($item);
+
+$reponse		=	$client->send($request);
+print_r($reponse->getTitle());
+```
 
 ### StandardBlendleOptions
 ```php
@@ -47,6 +78,5 @@ $options->setBaseUrl('https://internal.blendle.nl');
 $options->setMeUrl('https://internal.blendle.nl/me');
 $options->setTokensUrl('https://internal.blendle.nl/tokens');
 ```
-
 - - - 
-Thanks to [https://blendle.nl](Blendle) 
+Thanks to [Blendle](https://blendle.nl)

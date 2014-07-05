@@ -7,7 +7,8 @@ class StandardBlendleOptions
     protected $baseUrl 		= 	'https://ws.blendle.nl';
     protected $tokensUrl	=	'https://ws.blendle.nl/tokens';
     protected $meUrl		=	'https://ws.blendle.nl/me';
-    protected $popularUrl	=	'https://ws.blendle.nl/popular';
+    protected $popularUrl	=	'https://ws.blendle.nl/items/popular?include=popular_post&amount=%d';
+    protected $itemUrl		=	'https://ws.blendle.nl/item/%s';
 	
 	/**
 	 * getBaseUrl
@@ -43,6 +44,15 @@ class StandardBlendleOptions
 	 */
 	public function getPopularUrl() {
 		return $this->popularUrl;
+	}
+	
+	/**
+	 * getItemUrl
+	 * 
+	 * @return string $itemUrl
+	 */
+	public function getItemUrl() {
+		return $this->itemUrl;
 	}
 
 	/**
@@ -99,5 +109,19 @@ class StandardBlendleOptions
 		}
 	
 		$this->popularUrl = $popularUrl;
+	}
+	
+	/**
+	 * setItemUrl
+	 * 
+	 * @param String $itemUrl
+	 * @throws \Blendle\Exception\MalformedURLException
+	 */
+	public function setItemUrl($itemUrl) {
+		if( filter_var($itemUrl, FILTER_VALIDATE_URL) === false ) {
+			throw new \Blendle\Exception\MalformedURLException();
+		}
+		
+		$this->itemUrl = $itemUrl;
 	}
 }

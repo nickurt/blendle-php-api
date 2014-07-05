@@ -3,6 +3,7 @@
 namespace Blendle\Client;
 
 use Blendle\Model\Authorization;
+
 class StandardClient
 {
     protected $options;
@@ -50,6 +51,12 @@ class StandardClient
     			break;
     		case "Blendle\Request\UserRequest":
     			return $this->sendUserRequest($request);
+    			break;
+    		case "Blendle\Request\PopularRequest":
+    			return $this->sendPopularRequest($request);
+    			break;
+    		case "Blendle\Request\ItemRequest":
+    			return $this->sendItemRequest($request);
     			break;
     		default:
     			throw new \Blendle\Exception\InvalidArgumentException('InvalidRequestArgument');
@@ -251,5 +258,72 @@ class StandardClient
     	$user->setVerified($response->verified);
     
     	return $user;
+    }
+    
+    protected function sendPopularRequest(\Blendle\Request\PopularRequest $request) { 
+    	$this->setRequestUrl( sprintf($this->getOptions()->getPopularUrl(), $request->getAmount()) );
+    	$this->needAuthorizationToken(false);
+    	
+    	$response = $this->getRequest ($request);
+    	
+    	$obj = new \Blendle\Model\Popular();
+    	
+    	foreach($response->_embedded->items as $items) {
+    		$item 		= 	new \Blendle\Model\Item();
+    		
+    		$item->setId($items->_embedded->manifest->id);
+    		$item->setFormatVersion($items->_embedded->manifest->format_version);
+    		$item->setDate($items->_embedded->manifest->date);
+    		$item->setUrl($items->_links->self->href);
+    		
+    		$item->setPrice($items->price);
+    		
+    		// Title
+    		foreach($items->_embedded->manifest->body as $body) {
+    			switch($body->type) {
+    				case "hl1":
+    					$item->setTitle($body->content);
+    					break;
+    				default:
+    					break;
+    			}
+    		}
+    		
+    		$obj->setItem($item);
+    	}
+    	
+    	return $obj;
+    }
+    
+    protected function sendItemRequest(\Blendle\Request\ItemRequest $request) {
+    	$this->setRequestUrl( sprintf($this->getOptions()->getItemUrl(), $request->getItem()->getId()) );
+    	$this->needAuthorizationToken(false);
+    	 
+    	$response 	= 	$this->getRequest ($request);
+
+    	// Blendle Item 
+    	$item 		= 	new \Blendle\Model\Item();
+
+    	$item->setId($response->_embedded->manifest->id);
+    	$item->setFormatVersion($response->_embedded->manifest->format_version);
+    	$item->setDate($response->_embedded->manifest->date);
+    	$item->setUrl($response->_links->self->href);
+
+    	$item->setAcquired($response->acquired);
+    	$item->setRefundable($response->refundable);
+    	$item->setPrice($response->price);
+    	
+        // Title
+    	foreach($response->_embedded->manifest->body as $body) {
+    		switch($body->type) {
+    			case "hl1":
+    				$item->setTitle($body->content);
+    				break;
+    			default:
+    				break;
+    		}
+    	}
+        	 
+    	return $item;
     }
 }

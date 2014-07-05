@@ -3,8 +3,12 @@
 namespace Blendle\Model;
 
 class Popular {
-	protected $date;
-	protected $format_version;
-	protected $id;
-	protected $initial_publication_time;
+	protected $items;
+	
+	public function setItem($item) {
+		$this->items[] = $item;
+	}
+	public function getItem() {
+		return $this->items;
+	}
 }
