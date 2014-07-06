@@ -1,5 +1,12 @@
 # Blendle #
 - - -
+## Installation
+
+Installatie via de composer
+```sh
+php composer.phar require nickurt/blendle:dev-master
+```
+
 ## Requirements
 
 * PHP 5.4+
@@ -20,20 +27,20 @@ $response     =   $client->send($request);
 print_r($response->getToken());
 ```
 
-### UserRequest
+### MeRequest
 
 ```php
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
-$client         =   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
-$authorization  =   new \Blendle\Model\Authorization();
+$client        	=   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+$authorization 	=   new \Blendle\Model\Authorization();
 $authorization->setToken('dSwD*xFss8df58s7dfsdfd77872');
 
-$request        =   new \Blendle\Request\UserRequest();
+$request       	=   new \Blendle\Request\MeRequest();
 $request->setAuthorization($authorization);
 
-$response       =   $client->send($request);
+$response      	=   $client->send($request);
 print_r($response->getUsername()); 
 ```
 ### PopularRequest
@@ -49,6 +56,21 @@ foreach($response->getItem() as $items) {
 	print_r($items->getTitle());
 }
 ```
+
+### RealtimeRequest
+
+```php
+<?php
+require_once __DIR__.'/../vendor/autoload.php';
+
+$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+$response		=	$client->send(new \Blendle\Request\RealtimeRequest());
+
+foreach($response->getItem() as $items) {
+	print_r($items->getTitle());
+}
+```
+
 
 ### ItemRequest
 
@@ -67,6 +89,24 @@ $request->setItem($item);
 $reponse		=	$client->send($request);
 print_r($reponse->getTitle());
 ```
+
+### UserPostsRequest
+
+```php
+<?php
+require_once __DIR__.'/../vendor/autoload.php';
+
+$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+
+$request 		=	new \Blendle\Request\UserPostsRequest();
+$request->setUsername('marten');
+$response 		=	$client->send($request);
+
+foreach($response->getItem() as $items) {
+    print_r($items->getTitle());
+}
+```
+
 
 ### StandardBlendleOptions
 ```php

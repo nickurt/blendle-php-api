@@ -2,7 +2,7 @@
 
 namespace Blendle\Model;
 
-class Popular {
+class Realtime {
 	protected $items;
 	
 	public function setItem(\Blendle\Model\Item $item) {

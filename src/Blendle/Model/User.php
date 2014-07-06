@@ -5,19 +5,13 @@ namespace Blendle\Model;
 class User {
 	protected $id;
 	protected $username;
-	protected $email;
-	protected $email_confirmed;
-	protected $facebook_id;
 	protected $followers;
-	protected $followers_opt_out;
 	protected $follows;
-	protected $mixpanel_opt_out;
-	protected $nrc_email_share;
 	protected $posts;
 	protected $reads;
 	protected $text;
-	protected $unconfirmed_uid;
 	protected $verified;
+
 	/**
 	 * @return the $id
 	 */
@@ -33,27 +27,6 @@ class User {
 	}
 
 	/**
-	 * @return the $email
-	 */
-	public function getEmail() {
-		return $this->email;
-	}
-
-	/**
-	 * @return the $emailconfirmed
-	 */
-	public function getEmailConfirmed() {
-		return $this->email_confirmed;
-	}
-
-	/**
-	 * @return the $facebook_id
-	 */
-	public function getFacebookId() {
-		return $this->facebook_id;
-	}
-
-	/**
 	 * @return the $followers
 	 */
 	public function getFollowers() {
@@ -61,31 +34,10 @@ class User {
 	}
 
 	/**
-	 * @return the $followers_opt_out
-	 */
-	public function getFollowersOptOut() {
-		return $this->followers_opt_out;
-	}
-
-	/**
 	 * @return the $follows
 	 */
 	public function getFollows() {
 		return $this->follows;
-	}
-
-	/**
-	 * @return the $mixpanel_opt_out
-	 */
-	public function getMixpanelOptOut() {
-		return $this->mixpanel_opt_out;
-	}
-
-	/**
-	 * @return the $nrc_email_share
-	 */
-	public function getNrcEmailShare() {
-		return $this->nrc_email_share;
 	}
 
 	/**
@@ -110,13 +62,6 @@ class User {
 	}
 
 	/**
-	 * @return the $unconfirmed_uid
-	 */
-	public function getUnconfirmedUid() {
-		return $this->unconfirmed_uid;
-	}
-
-	/**
 	 * @return the $verified
 	 */
 	public function getVerified() {
@@ -138,27 +83,6 @@ class User {
 	}
 
 	/**
-	 * @param field_type $email
-	 */
-	public function setEmail($email) {
-		$this->email = $email;
-	}
-
-	/**
-	 * @param field_type $email_confirmed
-	 */
-	public function setEmailConfirmed($email_confirmed) {
-		$this->email_confirmed = $email_confirmed;
-	}
-
-	/**
-	 * @param field_type $facebook_id
-	 */
-	public function setFacebookId($facebook_id) {
-		$this->facebook_id = $facebook_id;
-	}
-
-	/**
 	 * @param field_type $followers
 	 */
 	public function setFollowers($followers) {
@@ -166,31 +90,10 @@ class User {
 	}
 
 	/**
-	 * @param field_type $followers_opt_out
-	 */
-	public function setFollowersOptOut($followers_opt_out) {
-		$this->followers_opt_out = $followers_opt_out;
-	}
-
-	/**
 	 * @param field_type $follows
 	 */
 	public function setFollows($follows) {
 		$this->follows = $follows;
-	}
-
-	/**
-	 * @param field_type $mixpanel_opt_out
-	 */
-	public function setMixpanelOptOut($mixpanel_opt_out) {
-		$this->mixpanel_opt_out = $mixpanel_opt_out;
-	}
-
-	/**
-	 * @param field_type $nrc_email_share
-	 */
-	public function setNrcEmailShare($nrc_email_share) {
-		$this->nrc_email_share = $nrc_email_share;
 	}
 
 	/**
@@ -212,13 +115,6 @@ class User {
 	 */
 	public function setText($text) {
 		$this->text = $text;
-	}
-
-	/**
-	 * @param field_type $unconfirmed_uid
-	 */
-	public function setUnconfirmedUid($unconfirmed_uid) {
-		$this->unconfirmed_uid = $unconfirmed_uid;
 	}
 
 	/**

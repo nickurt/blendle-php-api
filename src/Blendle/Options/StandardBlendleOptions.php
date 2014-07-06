@@ -7,9 +7,13 @@ class StandardBlendleOptions
     protected $baseUrl 		= 	'https://ws.blendle.nl';
     protected $tokensUrl	=	'https://ws.blendle.nl/tokens';
     protected $meUrl		=	'https://ws.blendle.nl/me';
-    protected $popularUrl	=	'https://ws.blendle.nl/items/popular?include=popular_post&amount=%d';
+
     protected $itemUrl		=	'https://ws.blendle.nl/item/%s';
-	
+    protected $popularUrl	=	'https://ws.blendle.nl/items/popular?amount=%d&page=%d&include=popular_post';
+	protected $realtimeUrl	=	'https://ws.blendle.nl/posts?amount=%d&page=%d';
+	protected $searchUrl	=	'https://ws.blendle.nl/search?q=%s&limit=%s&offset=%s';
+	protected $userPostsUrl	=	'https://ws.blendle.nl/user/%s/posts';
+
 	/**
 	 * getBaseUrl
 	 * 
@@ -53,6 +57,24 @@ class StandardBlendleOptions
 	 */
 	public function getItemUrl() {
 		return $this->itemUrl;
+	}
+
+	/**
+	 * getRealtimeUrl
+	 *
+	 * @return string $realtimeUrl
+	 */
+	public function getRealtimeUrl() {
+		return $this->realtimeUrl;
+	}
+
+	/**
+	 * getUserPostsUrl
+	 *
+	 * @return string $userPostsUrl
+	 */
+	public function getUserPostsUrl() {
+		return $this->userPostsUrl;
 	}
 
 	/**
@@ -123,5 +145,33 @@ class StandardBlendleOptions
 		}
 		
 		$this->itemUrl = $itemUrl;
+	}
+
+	/**
+	 * setRealtimeUrl
+	 * 
+	 * @param String $realtimeUrl
+	 * @throws \Blendle\Exception\MalformedURLException
+	 */
+	public function setRealtimeUrl($realtimeUrl) {
+		if( filter_var($realtimeUrl, FILTER_VALIDATE_URL) === false ) {
+			throw new \Blendle\Exception\MalformedURLException();
+		}
+		
+		$this->realtimeUrl = $realtimeUrl;
+	}
+
+	/**
+	 * setUrlPostsUrl
+	 * 
+	 * @param String $userPostsUrl
+	 * @throws \Blendle\Exception\MalformedURLException
+	 */
+	public function setUserPostsUrl($userPostsUrl) {
+		if( filter_var($userPostsUrl, FILTER_VALIDATE_URL) === false ) {
+			throw new \Blendle\Exception\MalformedURLException();
+		}
+		
+		$this->userPostsUrl = $userPostsUrl;
 	}
 }

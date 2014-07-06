@@ -43,14 +43,14 @@ class StandardClient
 	 * @throws \Blendle\Exception\InvalidArgumentException
 	 * @return \Blendle\Model\Authorization|\Blendle\Model\User
 	 */
-    public function send(\Blendle\Request\RequestInterface $request)
+    public function send(\Blendle\Request\RequestInterface $request) 
     {
     	switch (get_class($request)) {
     		case "Blendle\Request\AuthorizationRequest":
     			return $this->sendAuthorizationRequest($request);
     			break;
-    		case "Blendle\Request\UserRequest":
-    			return $this->sendUserRequest($request);
+    		case "Blendle\Request\MeRequest":
+    			return $this->sendMeRequest($request);
     			break;
     		case "Blendle\Request\PopularRequest":
     			return $this->sendPopularRequest($request);
@@ -58,6 +58,12 @@ class StandardClient
     		case "Blendle\Request\ItemRequest":
     			return $this->sendItemRequest($request);
     			break;
+    		case "Blendle\Request\RealtimeRequest":
+    			return $this->sendRealtimeRequest($request);
+    			break;
+            case "Blendle\Request\UserPostsRequest":
+                return $this->sendUserPostsRequest($request);
+                break;
     		default:
     			throw new \Blendle\Exception\InvalidArgumentException('InvalidRequestArgument');
     			break;
@@ -227,20 +233,20 @@ class StandardClient
     /**
      * sendUserRequest
      *
-     * @param \Blendle\Request\UserRequest $request
-     * @return \Blendle\Model\User
+     * @param \Blendle\Request\MeRequest $request
+     * @return \Blendle\Model\Me
      */
-    protected function sendUserRequest(\Blendle\Request\UserRequest $request) {
+    protected function sendMeRequest(\Blendle\Request\MeRequest $request) {
     	// Set the data
     	$this->setRequestUrl( $this->getOptions()->getMeUrl() );
     	$this->needAuthorizationToken(true);
     	$this->setAuthorizationToken($request->getAuthorization()->getToken());
-    	
+
     	// Request
     	$response = $this->getRequest( $request );
     	
     	// User
-    	$user = new \Blendle\Model\User();
+    	$user = new \Blendle\Model\Me();
     	$user->setId($response->id);
     	$user->setUsername($response->username);
     	$user->setPosts($response->posts);
@@ -261,7 +267,7 @@ class StandardClient
     }
     
     protected function sendPopularRequest(\Blendle\Request\PopularRequest $request) { 
-    	$this->setRequestUrl( sprintf($this->getOptions()->getPopularUrl(), $request->getAmount()) );
+    	$this->setRequestUrl( sprintf($this->getOptions()->getPopularUrl(), $request->getAmount(), $request->getPage()) );
     	$this->needAuthorizationToken(false);
     	
     	$response = $this->getRequest ($request);
@@ -325,5 +331,79 @@ class StandardClient
     	}
         	 
     	return $item;
+    }
+    
+    protected function sendRealtimeRequest(\Blendle\Request\RealtimeRequest $request) {
+    	$this->setRequestUrl( sprintf( $this->getOptions()->getRealtimeUrl(), $request->getAmount(), $request->getPage() ) );
+    	$this->needAuthorizationToken(false);
+
+    	$response 	= 	$this->getRequest ($request);
+    	
+    	$obj 		= 	new \Blendle\Model\Realtime();
+
+    	foreach($response->_embedded->posts as $items) {
+    		$item 		= 	new \Blendle\Model\Item();
+
+    		$item->setId($items->_embedded->manifest->id);
+    		$item->setFormatVersion($items->_embedded->manifest->format_version);
+    		$item->setDate($items->_embedded->manifest->date);
+    		$item->setUrl($items->_links->self->href);
+    		
+    //		$item->setPrice($items->price);
+    		
+    		// Title
+    		foreach($items->_embedded->manifest->body as $body) {
+    			switch($body->type) {
+    				case "hl1":
+    					$item->setTitle($body->content);
+    					break;
+    				default:
+    					break;
+    			}
+    		}
+    		
+    		$obj->setItem($item);
+    	}
+    	
+    	return $obj;
+    
+    	return $item;
+    }
+
+    protected function sendUserPostsRequest(\Blendle\Request\UserPostsRequest $request) {
+        $this->setRequestUrl( sprintf( $this->getOptions()->getUserPostsUrl(), $request->getUsername() ) );
+        $this->needAuthorizationToken(false);
+
+        $response   =   $this->getRequest ($request);
+
+        $obj        =   new \Blendle\Model\UserPosts();
+
+        foreach($response->_embedded->posts as $items) {
+            $item       =   new \Blendle\Model\Item();
+
+            $item->setId($items->_embedded->manifest->id);
+            $item->setFormatVersion($items->_embedded->manifest->format_version);
+            $item->setDate($items->_embedded->manifest->date);
+            $item->setUrl($items->_links->self->href);
+            
+    //      $item->setPrice($items->price);
+            
+            // Title
+            foreach($items->_embedded->manifest->body as $body) {
+                switch($body->type) {
+                    case "hl1":
+                        $item->setTitle($body->content);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            $obj->setItem($item);
+        }
+        
+        return $obj;
+    
+        return $item;
     }
 }
