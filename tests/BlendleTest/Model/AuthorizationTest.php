@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 class AuthoriationTest extends TestCase
 {
 	/**
-     * @expectedException \Blendle\Exception\InvalidCredentialException
+     * @expectedException \GuzzleHttp\Exception\ClientException
      */
 	public function testInvalidAuthoriationRequest() {
 		$client       =   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());

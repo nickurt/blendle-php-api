@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 class ItemTest extends TestCase
 {
 	/**
-     * @expectedException \Blendle\Exception\HttpRequestException
+     * @expectedException \GuzzleHttp\Exception\ClientException
      */
 	public function testInvalidItemRequest() {
 		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
