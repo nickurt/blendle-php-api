@@ -227,6 +227,10 @@ class StandardClient
 		$authorization = new \Blendle\Model\Authorization();
 		$authorization->setToken($response->token);
 
+        // Set the Token in the Session and remove the old one
+        $authorization->removeTokenCookie();
+        $authorization->setTokenCookie($response->token);
+
 		return $authorization;
     }
     
