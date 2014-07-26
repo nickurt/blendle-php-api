@@ -80,34 +80,25 @@ class StandardClient
     protected function getRequest($request) {
     	$token 		= 	$this->isAuthorizationTokenRequired() ? $this->getAuthorizationToken() : false;
 
-    	$ch = curl_init();
-    	curl_setopt($ch, CURLOPT_URL, $this->getRequestUrl());
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    	curl_setopt($ch, CURLOPT_HEADER, 0);
-    	curl_setopt($ch, CURLOPT_POST, 0);
-    	curl_setopt($ch, CURLOPT_HTTPHEADER, array($token));
-    	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    	$output = curl_exec($ch);
-    	 
-    	// Get the HTTP Status of the CurlRequest
-    	$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    	
+        $client     =   new \GuzzleHttp\Client();
+        $response   =   $client->get( $this->getRequestUrl(), [
+                            'headers'   =>  ($token) ? ['X-Authorization' => $token] : [] 
+                        ]);
+
     	// Request not successfully
-    	if($http_status === 404 || $http_status === 500 || $http_status === 403) {
+    	if($response->getStatusCode() === 404 || $response->getStatusCode() === 500 || $response->getStatusCode() === 403) {
     		throw new \Blendle\Exception\HttpRequestException(
     			'Verzoek niet succesvol uitgevoerd'
     		);
     	}
     	
-    	$decoded = json_decode ( $output );
-    	
+    	$decoded   =   $response->json();
+
     	// Ugh, we have an problem!
-    	if( isset( $decoded->message ) ) {
-    		throw new \Blendle\Exception\InvalidCredentialException($decoded->message);
+    	if( isset( $decoded['message'] ) ) {
+    		throw new \Blendle\Exception\InvalidCredentialException($decoded['message']);
     	}
-    	
-    	curl_close($ch);
-    	
+
     	return $decoded;
     }
     
@@ -120,37 +111,30 @@ class StandardClient
      */
     protected function postRequest($request) {
     	$token 		= 	$this->isAuthorizationTokenRequired() ? $this->getAuthorizationToken() : false;
-    	
-    	$ch = curl_init();
-    	curl_setopt($ch, CURLOPT_URL, $this->getRequestUrl());
-    	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    	curl_setopt($ch, CURLOPT_HEADER, 0);
-    	curl_setopt($ch, CURLOPT_POST, 1);
-    	curl_setopt($ch, CURLOPT_POSTFIELDS, $this->getData());
-    	curl_setopt($ch, CURLOPT_HTTPHEADER, array($token));
-    	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    	$output = curl_exec($ch);
-    	 
-    	// Get the HTTP Status of the CurlRequest
-    	$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    	
+
+        $client     =   new \GuzzleHttp\Client();
+        $response   =   $client->post( $this->getRequestUrl(), [ 
+                            'headers'   =>  ($token) ? ['X-Authorization' => $token ] : [], 
+                            'json'      =>  (array) json_decode( $this->getData() ) 
+                        ]);
+
+        $body       =   $response->json();
+
     	// Request not successfully
-    	if($http_status === 404 || $http_status === 500 || $http_status === 403) {
-    		throw new \Blendle\Exception\HttpRequestException(
-    			'Verzoek niet succesvol uitgevoerd'
-    		);
-    	}
+    	if($response->getStatusCode() === 404 || $response->getStatusCode() === 500 || $response->getStatusCode() === 403) {
+            throw new \Blendle\Exception\HttpRequestException(
+                'Verzoek niet succesvol uitgevoerd'
+            );
+        }
     	
-    	$decoded = json_decode ( $output );
-    	
-    	// Ugh, we have an problem!
-    	if( isset( $decoded->message ) ) {
-    		throw new \Blendle\Exception\InvalidCredentialException($decoded->message);
-    	}
-    	
-    	curl_close($ch);
-    	
-    	return $decoded;
+    	$decoded   =   $response->json();
+
+        // Ugh, we have an problem!
+        if( isset( $decoded['message'] ) ) {
+            throw new \Blendle\Exception\InvalidCredentialException($decoded['message']);
+        }
+
+        return $decoded;
     }
     
     public function setData(array $data) {
@@ -184,7 +168,8 @@ class StandardClient
      * @return string AuthorizationToken
      */
     public function getAuthorizationToken() {
-    	return sprintf('X-Authorization:Token token="%s"', $this->authorization);   
+        return sprintf('Token token="%s"', $this->authorization);  
+    //	return sprintf('X-Authorization:Token token="%s"', $this->authorization);   
     }
     
     /**
@@ -225,7 +210,7 @@ class StandardClient
 
 		// Authorization
 		$authorization = new \Blendle\Model\Authorization();
-		$authorization->setToken($response->token);
+		$authorization->setToken($response['token']);
 
         // Set the Token in the cookie and remove the old one
         $authorization->removeTokenCookie();
@@ -251,21 +236,21 @@ class StandardClient
     	
     	// User
     	$user = new \Blendle\Model\Me();
-    	$user->setId($response->id);
-    	$user->setUsername($response->username);
-    	$user->setPosts($response->posts);
-    	$user->setReads($response->reads);
-    	$user->setFollowers($response->followers);
-    	$user->setFollows($response->follows);
-    	$user->setEmail($response->email);
-    	$user->setEmailConfirmed($response->email_confirmed);
-    	$user->setFacebookId($response->facebook_id);
-    	$user->setFollowersOptOut($response->followers_opt_out);
-    	$user->setMixpanelOptOut($response->mixpanel_opt_out);
-    	$user->setNrcEmailShare($response->nrc_email_share);
-    	$user->setText($response->nrc_email_share);
-    	$user->setUnconfirmedUid($response->unconfirmed_uid);
-    	$user->setVerified($response->verified);
+    	$user->setId($response['id']);
+    	$user->setUsername($response['username']);
+    	$user->setPosts($response['posts']);
+    	$user->setReads($response['reads']);
+    	$user->setFollowers($response['followers']);
+    	$user->setFollows($response['follows']);
+    	$user->setEmail($response['email']);
+    	$user->setEmailConfirmed($response['email_confirmed']);
+    	$user->setFacebookId($response['facebook_id']);
+    	$user->setFollowersOptOut($response['followers_opt_out']);
+    	$user->setMixpanelOptOut($response['mixpanel_opt_out']);
+    	$user->setNrcEmailShare($response['nrc_email_share']);
+    	$user->setText($response['nrc_email_share']);
+    	$user->setUnconfirmedUid($response['unconfirmed_uid']);
+    	$user->setVerified($response['verified']);
     
     	return $user;
     }
@@ -278,26 +263,26 @@ class StandardClient
     	
     	$obj = new \Blendle\Model\Popular();
     	
-    	foreach($response->_embedded->items as $items) {
+    	foreach($response['_embedded']['items'] as $items) {
     		$item 		= 	new \Blendle\Model\Item();
     		
-    		$item->setId($items->_embedded->manifest->id);
-    		$item->setFormatVersion($items->_embedded->manifest->format_version);
-    		$item->setDate($items->_embedded->manifest->date);
-    		$item->setUrl($items->_links->self->href);
-    		
-    		$item->setPrice($items->price);
-    		
-    		// Title
-    		foreach($items->_embedded->manifest->body as $body) {
-    			switch($body->type) {
-    				case "hl1":
-    					$item->setTitle($body->content);
-    					break;
-    				default:
-    					break;
-    			}
-    		}
+    		$item->setId($items['_embedded']['manifest']['id']);
+            $item->setFormatVersion($items['_embedded']['manifest']['format_version']);
+            $item->setDate($items['_embedded']['manifest']['date']);
+            $item->setUrl($items['_links']['self']['href']);
+            
+    //      $item->setPrice($items->price);
+            
+            // Title
+            foreach($items['_embedded']['manifest']['body'] as $body) {
+                switch($body['type']) {
+                    case "hl1":
+                        $item->setTitle($body['content']);
+                        break;
+                    default:
+                        break;
+                }
+            }
     		
     		$obj->setItem($item);
     	}
@@ -314,20 +299,20 @@ class StandardClient
     	// Blendle Item 
     	$item 		= 	new \Blendle\Model\Item();
 
-    	$item->setId($response->_embedded->manifest->id);
-    	$item->setFormatVersion($response->_embedded->manifest->format_version);
-    	$item->setDate($response->_embedded->manifest->date);
-    	$item->setUrl($response->_links->self->href);
+    	$item->setId($response['_embedded']['manifest']['id']);
+        $item->setFormatVersion($response['_embedded']['manifest']['format_version']);
+        $item->setDate($response['_embedded']['manifest']['date']);
+        $item->setUrl($response['_links']['self']['href']);
 
-    	$item->setAcquired($response->acquired);
-    	$item->setRefundable($response->refundable);
-    	$item->setPrice($response->price);
+    	$item->setAcquired($response['acquired']);
+    	$item->setRefundable($response['refundable']);
+    	$item->setPrice($response['price']);
     	
         // Title
-    	foreach($response->_embedded->manifest->body as $body) {
-    		switch($body->type) {
+    	foreach($response['_embedded']['manifest']['body'] as $body) {
+    		switch($body['type']) {
     			case "hl1":
-    				$item->setTitle($body->content);
+    				$item->setTitle($body['content']);
     				break;
     			default:
     				break;
@@ -345,21 +330,21 @@ class StandardClient
     	
     	$obj 		= 	new \Blendle\Model\Realtime();
 
-    	foreach($response->_embedded->posts as $items) {
+    	foreach($response['_embedded']['posts'] as $items) {
     		$item 		= 	new \Blendle\Model\Item();
 
-    		$item->setId($items->_embedded->manifest->id);
-    		$item->setFormatVersion($items->_embedded->manifest->format_version);
-    		$item->setDate($items->_embedded->manifest->date);
-    		$item->setUrl($items->_links->self->href);
+    		$item->setId($items['_embedded']['manifest']['id']);
+    		$item->setFormatVersion($items['_embedded']['manifest']['format_version']);
+    		$item->setDate($items['_embedded']['manifest']['date']);
+    		$item->setUrl($items['_links']['self']['href']);
     		
     //		$item->setPrice($items->price);
     		
     		// Title
-    		foreach($items->_embedded->manifest->body as $body) {
-    			switch($body->type) {
+    		foreach($items['_embedded']['manifest']['body'] as $body) {
+    			switch($body['type']) {
     				case "hl1":
-    					$item->setTitle($body->content);
+    					$item->setTitle($body['content']);
     					break;
     				default:
     					break;
@@ -370,8 +355,6 @@ class StandardClient
     	}
     	
     	return $obj;
-    
-    	return $item;
     }
 
     protected function sendUserPostsRequest(\Blendle\Request\UserPostsRequest $request) {
@@ -382,21 +365,21 @@ class StandardClient
 
         $obj        =   new \Blendle\Model\UserPosts();
 
-        foreach($response->_embedded->posts as $items) {
+        foreach($response['_embedded']['posts'] as $items) {
             $item       =   new \Blendle\Model\Item();
 
-            $item->setId($items->_embedded->manifest->id);
-            $item->setFormatVersion($items->_embedded->manifest->format_version);
-            $item->setDate($items->_embedded->manifest->date);
-            $item->setUrl($items->_links->self->href);
+            $item->setId($items['_embedded']['manifest']['id']);
+            $item->setFormatVersion($items['_embedded']['manifest']['format_version']);
+            $item->setDate($items['_embedded']['manifest']['date']);
+            $item->setUrl($items['_links']['self']['href']);
             
     //      $item->setPrice($items->price);
             
             // Title
-            foreach($items->_embedded->manifest->body as $body) {
-                switch($body->type) {
+            foreach($items['_embedded']['manifest']['body'] as $body) {
+                switch($body['type']) {
                     case "hl1":
-                        $item->setTitle($body->content);
+                        $item->setTitle($body['content']);
                         break;
                     default:
                         break;
@@ -407,7 +390,5 @@ class StandardClient
         }
         
         return $obj;
-    
-        return $item;
     }
 }

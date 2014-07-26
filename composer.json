@@ -6,5 +6,8 @@
         "psr-4": {
             "Blendle\\": "src/Blendle"
         }
+    },
+  	"require": {
+        "guzzlehttp/guzzle": "4.*"
     }
 }

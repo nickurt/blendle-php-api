@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 class MeTest extends TestCase
 {
 	/**
-     * @expectedException \Blendle\Exception\InvalidCredentialException
+     * @expectedException \GuzzleHttp\Exception\ClientException
      */
 	public function testInvalidMeRequest() {
 		$client        	=   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());

@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 class UserPostsTest extends TestCase
 {
 	/**
-     * @expectedException \Blendle\Exception\HttpRequestException
+     * @expectedException \GuzzleHttp\Exception\ClientException
      */
 	public function testInvalidUserPostsRequest() {
 		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
