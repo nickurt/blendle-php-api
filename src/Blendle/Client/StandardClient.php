@@ -292,8 +292,12 @@ class StandardClient
     
     protected function sendItemRequest(\Blendle\Request\ItemRequest $request) {
     	$this->setRequestUrl( sprintf($this->getOptions()->getItemUrl(), $request->getItem()->getId()) );
-    	$this->needAuthorizationToken(false);
-    	 
+        $this->needAuthorizationToken( (booL) $request->hasAuthorization() );
+        
+        // The user injected a auth token, so get the token
+        if( $this->isAuthorizationTokenRequired() ) 
+            $this->setAuthorizationToken($request->getAuthorization()->getToken());
+
     	$response 	= 	$this->getRequest ($request);
 
     	// Blendle Item 
@@ -307,17 +311,39 @@ class StandardClient
     	$item->setAcquired($response['acquired']);
     	$item->setRefundable($response['refundable']);
     	$item->setPrice($response['price']);
-    	
+
         // Title
-    	foreach($response['_embedded']['manifest']['body'] as $body) {
-    		switch($body['type']) {
-    			case "hl1":
-    				$item->setTitle($body['content']);
-    				break;
-    			default:
-    				break;
-    		}
-    	}
+        foreach($response['_embedded']['manifest']['body'] as $body) {
+            switch($body['type']) {
+                case "hl1":
+                    $item->setTitle($body['content']);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Yeah, the user bought it, so lets request the whole article
+        if( $item->getAcquired() ) {
+            // Ok, change the RequestUrl, the other settings already correct
+            $this->setRequestUrl( sprintf($this->getOptions()->getItemContentUrl(), $request->getItem()->getId()) );
+            
+            $responseContent   =   $this->getRequest ($request);
+
+            foreach($responseContent['_embedded']['content']['body'] as $body) {
+                switch($body['type']) {
+                    case "hl1":
+                    case "byline":
+                    case "lead":
+                    case "p":
+                    case "ph":
+                        $item->setBody($body['content']);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         	 
     	return $item;
     }

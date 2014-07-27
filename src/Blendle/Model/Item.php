@@ -11,6 +11,7 @@ class Item {
 	protected $format_version;
 	protected $url;
 	protected $title;
+	protected $body;
 	
 	public function setId($id) {
 		$this->id = $id;
@@ -43,6 +44,10 @@ class Item {
 	public function setPrice($price) {
 		$this->price = $price;
 	}
+
+	public function setBody($body) {
+		$this->body[] = $body;
+	}
 	
 	public function getId() {
 		return $this->id;
@@ -50,5 +55,13 @@ class Item {
 	
 	public function getTitle() {
 		return $this->title;
+	}
+
+	public function getBody() {
+		return $this->body;
+	}
+
+	public function getAcquired() {
+		return $this->acquired;
 	}
 }
