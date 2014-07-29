@@ -311,12 +311,21 @@ class StandardClient
     	$item->setAcquired($response['acquired']);
     	$item->setRefundable($response['refundable']);
     	$item->setPrice($response['price']);
+        $item->setWords($response['_embedded']['manifest']['length']['words']);
 
         // Title
         foreach($response['_embedded']['manifest']['body'] as $body) {
             switch($body['type']) {
                 case "hl1":
                     $item->setTitle($body['content']);
+                    break;
+                case "kicker":
+                case "intro":
+                case "byline":
+                case "lead":
+                case "p":
+                case "ph":
+                    $item->setbody($body['content']);   
                     break;
                 default:
                     break;
@@ -333,6 +342,8 @@ class StandardClient
             foreach($responseContent['_embedded']['content']['body'] as $body) {
                 switch($body['type']) {
                     case "hl1":
+                    case "kicker":
+                    case "intro":
                     case "byline":
                     case "lead":
                     case "p":

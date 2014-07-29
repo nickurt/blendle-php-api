@@ -12,6 +12,7 @@ class Item {
 	protected $url;
 	protected $title;
 	protected $body;
+	protected $words;
 	
 	public function setId($id) {
 		$this->id = $id;
@@ -46,7 +47,11 @@ class Item {
 	}
 
 	public function setBody($body) {
-		$this->body[] = $body;
+		$this->body[] = strip_tags( $body );
+	}
+
+	public function setWords($words) {
+		$this->words = $words;
 	}
 	
 	public function getId() {
@@ -63,5 +68,17 @@ class Item {
 
 	public function getAcquired() {
 		return $this->acquired;
+	}
+
+	public function getWords() {
+		return $this->words;
+	}
+
+	public function getPrice() {
+		return $this->price;
+	}
+
+	public function getWordsPrice() {
+		return number_format( ( $this->price / $this->words ), 6);
 	}
 }
