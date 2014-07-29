@@ -1,11 +1,25 @@
 # Blendle #
 - - -
+## What is Blendle ???
+
+> ### This is Blendle
+> In The Netherlands people can browse newspapers and magazines for free. They 
+> can follow friends, colleagues and celebrities to see what today's must-reads > are. And Dutch people only pay for what they read. The Dutch like it that way. - [Blendle](https://launch.blendle.nl/welcome/)
+
 ## Installation
 
-Installatie via de composer
+Installation with the composer
 ```sh
 php composer.phar require nickurt/blendle:dev-master
 ```
+
+## Contributing
+It's easy:
+
+* Fork it
+* Clone it
+* Create feature/hotfix branch
+* Pull request it
 
 ## Requirements
 
@@ -24,6 +38,7 @@ $request->setUsername('username');
 $request->setPassword('password');
 
 $response     =   $client->send($request);
+
 print_r($response->getToken());
 ```
 
@@ -33,7 +48,7 @@ print_r($response->getToken());
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
 
-$client        	=   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+$client            =   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 $authorization 	=   new \Blendle\Model\Authorization();
 $authorization->setToken('dSwD*xFss8df58s7dfsdfd77872');
 
@@ -85,6 +100,10 @@ $item->setId('bnl-trn-20140705-3353927');
 
 $request		=	new \Blendle\Request\ItemRequest();
 $request->setItem($item);
+
+// Authorization to read the whole article?
+// Default the Authorization Token will be saved in a cookie after the AuthRequest
+$request->setAuthorization(new \Blendle\Model\Authorization());
 
 $reponse		=	$client->send($request);
 print_r($reponse->getTitle());
