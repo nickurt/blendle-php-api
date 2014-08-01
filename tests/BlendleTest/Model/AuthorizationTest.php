@@ -6,15 +6,13 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class AuthoriationTest extends TestCase
 {
-	/**
-     * @expectedException \GuzzleHttp\Exception\ClientException
-     */
-	public function testInvalidAuthoriationRequest() {
+	public function testSetAuthoriationRequest() {
 		$client       =   new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 		$request      =   new \Blendle\Request\AuthorizationRequest();
 		$request->setUsername('username');
 		$request->setPassword('password');
 
-		$response     =   $client->send($request);
+		$this->assertEquals('username', $request->getUsername());
+		$this->assertEquals('password', $request->getPassword());
 	}
 }

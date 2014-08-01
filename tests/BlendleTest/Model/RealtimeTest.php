@@ -18,7 +18,7 @@ class RealtimeTest extends TestCase
 	/**
      * @expectedException \Blendle\Exception\InvalidArgumentException
      */
-	public function testInvalidPopularPage() {
+	public function testInvalidRealtimePage() {
 		$client     	= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 		$request 		=	new \Blendle\Request\RealtimeRequest();
 		$request->setPage('1');

@@ -1,0 +1,64 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://ws.blendle.nl/item/bnl-nn-20140801-1405555"
+    },
+    "item_content": {
+      "href": "https://ws.blendle.nl/item/bnl-nn-20140801-1405555/content"
+    },
+    "mlt": {
+      "href": "https://ws.blendle.nl/item/bnl-nn-20140801-1405555/mlt"
+    }
+  },
+  "_embedded": {
+    "manifest": {
+      "format_version": 4,
+      "id": "bnl-nn-20140801-1405555",
+      "date": "2014-08-01T00:00:00+00:00",
+      "provider": {
+        "id": "nn"
+      },
+      "body": [
+        {
+          "type": "hl1",
+          "content": "Wat heeft dit nog met dj’en te maken?"
+        },
+        {
+          "type": "byline",
+          "content": " <span class=\"person\">Rolinde Hoorntje</span>"
+        },
+        {
+          "type": "lead",
+          "content": "<em class=\"intro\"><em class=\"keyword\">Dekmantel</em> <em class=\"strong\">Is een dj een serieuze artiest</em> of een lapzwans die simpelweg een cd’tje opzet? Draaien moet een kunst zijn, vinden ze bij festival Dekmantel, dat vandaag begint. Er is een speciaal podium voor ‘ambachtelijke’ dj’s.</em>"
+        },
+        {
+          "type": "p",
+          "content": "David ‘Ketta’ Guetta moest zijn best doen om niet te sterven, tijdens zijn optreden op Tomorrowland twee weken geleden. Woensdag ging een filmpje van zijn set viral op het grootste dancefestival van België."
+        },
+        {
+          "type": "p",
+          "content": "We zien hem amechtig in de…"
+        }
+      ],
+      "images": [
+
+      ],
+      "length": {
+        "words": 1365
+      },
+      "issue": {
+        "id": "bnl-nn-20140801"
+      },
+      "_links": {
+        "self": {
+          "href": "https://static.blendle.nl/publication/nn/2014/08/01/item/1405555/version/1/manifest.json"
+        }
+      }
+    }
+  },
+  "id": "bnl-nn-20140801-1405555",
+  "posts": 7,
+  "acquired": false,
+  "refundable": false,
+  "price": "0.19"
+}
