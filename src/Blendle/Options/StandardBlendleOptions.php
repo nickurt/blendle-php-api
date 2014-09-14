@@ -3,16 +3,16 @@
 namespace Blendle\Options;
 
 class StandardBlendleOptions {
-	protected $baseUrl 			=	'https://ws.blendle.nl';
-	protected $tokensUrl 		=	'https://ws.blendle.nl/tokens';
-	protected $meUrl 			=	'https://ws.blendle.nl/me';
+	protected $baseUrl			=	'https://ws.blendle.nl';
+	protected $tokensUrl		=	'https://ws.blendle.nl/tokens';
+	protected $meUrl			=	'https://ws.blendle.nl/me';
 	
-	protected $itemUrl 			=	'https://ws.blendle.nl/item/%s';
-	protected $itemContentUrl 	=	'https://ws.blendle.nl/item/%s/content';
-	protected $popularUrl 		=	'https://ws.blendle.nl/items/popular?amount=%d&page=%d&include=popular_post';
-	protected $realtimeUrl 		=	'https://ws.blendle.nl/posts?amount=%d&page=%d';
-	protected $searchUrl 		=	'https://ws.blendle.nl/search?q=%s&limit=%s&offset=%s';
-	protected $userPostsUrl 	=	'https://ws.blendle.nl/user/%s/posts';
+	protected $itemUrl			=	'https://ws.blendle.nl/item/%s';
+	protected $itemContentUrl	=	'https://ws.blendle.nl/item/%s/content';
+	protected $popularUrl		=	'https://ws.blendle.nl/items/popular?amount=%d&page=%d&include=popular_post';
+	protected $realtimeUrl		=	'https://ws.blendle.nl/posts?amount=%d&page=%d';
+	protected $searchUrl		=	'https://ws.blendle.nl/search?q=%s&limit=%s&offset=%s';
+	protected $userPostsUrl		=	'https://ws.blendle.nl/user/%s/posts';
 
 	/**
 	 * getBaseUrl
