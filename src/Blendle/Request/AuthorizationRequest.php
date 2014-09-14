@@ -10,7 +10,8 @@ class AuthorizationRequest implements RequestInterface
 	 * getUsername
 	 * @return String username
 	 */
-	public function getUsername() {
+	public function getUsername() 
+	{
 		return $this->username;
 	}
 
@@ -18,7 +19,8 @@ class AuthorizationRequest implements RequestInterface
 	 * getPassword
 	 * @return String password
 	 */
-	public function getPassword() {
+	public function getPassword() 
+	{
 		return $this->password;
 	}
 
@@ -26,7 +28,8 @@ class AuthorizationRequest implements RequestInterface
 	 * setUsername
 	 * @param String $username
 	 */
-	public function setUsername($username) {
+	public function setUsername($username) 
+	{
 		$this->username = $username;
 	}
 
@@ -34,7 +37,8 @@ class AuthorizationRequest implements RequestInterface
 	 * setPassword
 	 * @param String $password
 	 */
-	public function setPassword($password) {
+	public function setPassword($password) 
+	{
 		$this->password = $password;
 	}
 }

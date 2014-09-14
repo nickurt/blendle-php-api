@@ -15,112 +15,128 @@ class User {
 	/**
 	 * @return the $id
 	 */
-	public function getId() {
+	public function getId() 
+	{
 		return $this->id;
 	}
 
 	/**
 	 * @return the $username
 	 */
-	public function getUsername() {
+	public function getUsername() 
+	{
 		return $this->username;
 	}
 
 	/**
 	 * @return the $followers
 	 */
-	public function getFollowers() {
+	public function getFollowers() 
+	{
 		return $this->followers;
 	}
 
 	/**
 	 * @return the $follows
 	 */
-	public function getFollows() {
+	public function getFollows() 
+	{
 		return $this->follows;
 	}
 
 	/**
 	 * @return the $posts
 	 */
-	public function getPosts() {
+	public function getPosts() 
+	{
 		return $this->posts;
 	}
 
 	/**
 	 * @return the $reads
 	 */
-	public function getReads() {
+	public function getReads() 
+	{
 		return $this->reads;
 	}
 
 	/**
 	 * @return the $text
 	 */
-	public function getText() {
+	public function getText() 
+	{
 		return $this->text;
 	}
 
 	/**
 	 * @return the $verified
 	 */
-	public function getVerified() {
+	public function getVerified() 
+	{
 		return $this->verified;
 	}
 
 	/**
 	 * @param field_type $id
 	 */
-	public function setId($id) {
+	public function setId($id) 
+	{
 		$this->id = $id;
 	}
 
 	/**
 	 * @param field_type $username
 	 */
-	public function setUsername($username) {
+	public function setUsername($username) 
+	{
 		$this->username = $username;
 	}
 
 	/**
 	 * @param field_type $followers
 	 */
-	public function setFollowers($followers) {
+	public function setFollowers($followers) 
+	{
 		$this->followers = $followers;
 	}
 
 	/**
 	 * @param field_type $follows
 	 */
-	public function setFollows($follows) {
+	public function setFollows($follows) 
+	{
 		$this->follows = $follows;
 	}
 
 	/**
 	 * @param field_type $posts
 	 */
-	public function setPosts($posts) {
+	public function setPosts($posts) 
+	{
 		$this->posts = $posts;
 	}
 
 	/**
 	 * @param field_type $reads
 	 */
-	public function setReads($reads) {
+	public function setReads($reads) 
+	{
 		$this->reads = $reads;
 	}
 
 	/**
 	 * @param field_type $text
 	 */
-	public function setText($text) {
+	public function setText($text) 
+	{
 		$this->text = $text;
 	}
 
 	/**
 	 * @param field_type $verified
 	 */
-	public function setVerified($verified) {
+	public function setVerified($verified) 
+	{
 		$this->verified = $verified;
 	}
 }

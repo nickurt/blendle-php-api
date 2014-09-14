@@ -10,10 +10,13 @@ class Issue {
 
 	protected $items;
 
-	public function setItem(\Blendle\Model\Item $item) {
+	public function setItem(\Blendle\Model\Item $item) 
+	{
 		$this->items[] = $item;
 	}
-	public function getItem() {
+
+	public function getItem() 
+	{
 		return $this->items;
 	}
 }

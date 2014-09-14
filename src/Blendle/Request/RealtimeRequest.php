@@ -11,7 +11,8 @@ class RealtimeRequest implements RequestInterface
 	 * 
 	 * @return Integer $page
 	 */
-	public function getPage() {
+	public function getPage() 
+	{
 		return $this->page;
 	}
 
@@ -20,7 +21,8 @@ class RealtimeRequest implements RequestInterface
 	 * 
 	 * @return Ingeger $amount
 	 */
-	public function getAmount() {
+	public function getAmount() 
+	{
 		return $this->amount;
 	}
 
@@ -29,7 +31,8 @@ class RealtimeRequest implements RequestInterface
 	 * 
 	 * @param Integer $page
 	 */
-	public function setPage($page) {
+	public function setPage($page) 
+	{
 		if( !is_int($page) || $page < 1 ) {
 			throw new \Blendle\Exception\InvalidArgumentException();
 		}
@@ -42,7 +45,8 @@ class RealtimeRequest implements RequestInterface
 	 * 
 	 * @param Integer $amount
 	 */
-	public function setAmount($amount) {
+	public function setAmount($amount) 
+	{
 		if( !is_int($amount) || $amount < 1 || $amount > 20 ) {
 			throw new \Blendle\Exception\InvalidArgumentException();
 		}

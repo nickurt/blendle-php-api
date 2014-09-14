@@ -6,11 +6,13 @@ class ItemRequest implements RequestInterface
 	protected $item;
 	protected $authorization;
 	
-	public function setItem(\Blendle\Model\Item $model) {
+	public function setItem(\Blendle\Model\Item $model) 
+	{
 		$this->item = $model;
 	}
 	
-	public function getItem() {
+	public function getItem() 
+	{
 		return $this->item;
 	}
 
@@ -18,7 +20,8 @@ class ItemRequest implements RequestInterface
 	 * setAuthorization
 	 * @param \Blendle\Model\Authorization $model
 	 */
-	public function setAuthorization(\Blendle\Model\Authorization $model) {
+	public function setAuthorization(\Blendle\Model\Authorization $model) 
+	{
 		$this->authorization = $model;
 	}
 	
@@ -26,7 +29,8 @@ class ItemRequest implements RequestInterface
 	 * getAutorization
 	 * @return \Blendle\Model\Authorization
 	 */
-	public function getAuthorization() {
+	public function getAuthorization() 
+	{
 		return $this->authorization;
 	}
 
@@ -36,7 +40,8 @@ class ItemRequest implements RequestInterface
 	 *
 	 * @return Boolean
 	 */
-	public function hasAuthorization() {
+	public function hasAuthorization() 
+	{
 		return (bool) ($this->authorization instanceof \Blendle\Model\Authorization);
 	}
 }

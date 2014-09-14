@@ -12,7 +12,8 @@ class Authorization {
 	 * 
 	 * @return String $token
 	 */
-	public function getToken() {
+	public function getToken() 
+	{
 		return isset($this->token) ? $this->token : $this->getTokenCookie();
 	}
 
@@ -21,7 +22,8 @@ class Authorization {
 	 * 
 	 * @param String $token
 	 */
-	public function setToken($token) {
+	public function setToken($token) 
+	{
 		$this->token = $token;
 	}
 
@@ -30,7 +32,8 @@ class Authorization {
 	 * 
 	 * @param String $token
 	 */
-	public function setTokenCookie($token) {
+	public function setTokenCookie($token) 
+	{
 		// Set the cookie for ((60 * 60) * 24) * 30 (30 days) lifetime */
 		setcookie("token", $token, ( time() + 2592000 ) );
 	}
@@ -41,15 +44,17 @@ class Authorization {
 	 * Remove the Token (value) in the Cookie
 	 * 
 	 * @return boolean
-	 */
-	public function removeTokenCookie() {
-		if( isset($_COOKIE["token"]) ) {
+	 */	
+	public function removeTokenCookie() 
+	{
+		if( isset($_COOKIE["token"]) ) 
+		{
 			// Remove the token with null and set the expire date to the past
 			setcookie("token", '', time() - 3600);
-
+			
 			return true;
 		}
-
+		
 		return false;
 	}
 
@@ -60,11 +65,13 @@ class Authorization {
 	 * 
 	 * @throws \Blendle\Exception\RuntimeException
 	 */
-	public function getTokenCookie() {
-		if( ! isset($_COOKIE["token"]) ) {
+	public function getTokenCookie() 
+	{
+		if( ! isset($_COOKIE["token"]) ) 
+		{
 			throw new \Blendle\Exception\RuntimeException('Blendle Token Cookie not set');
 		}
-
+		
 		return $_COOKIE["token"];
 	}
 }

@@ -9,7 +9,8 @@ class UserPostsRequest implements RequestInterface
 	 * setUsername
 	 * @param String $username
 	 */
-	public function setUsername($username) {
+	public function setUsername($username) 
+	{
 		$this->username = $username;
 	}
 	
@@ -17,7 +18,8 @@ class UserPostsRequest implements RequestInterface
 	 * getUsername
 	 * @return String username
 	 */
-	public function getUsername() {
+	public function getUsername() 
+	{
 		return $this->username;
 	}
 }

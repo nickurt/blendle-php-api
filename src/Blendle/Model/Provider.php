@@ -5,10 +5,12 @@ namespace Blendle\Model;
 class Provider {
 	protected $name;
 	
-	public function setName($name) {
+	public function setName($name) 
+	{
 		$this->name = $name;
 	}
-	public function getName() {
+	public function getName() 
+	{
 		return $this->name;
 	}
 }
