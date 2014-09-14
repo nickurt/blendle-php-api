@@ -1,13 +1,14 @@
 {
     "name": "nickurt/blendle",
     "description": "Blendle - PHP",
+    "license": "MIT",
     "keywords": ["nickurt", "blendle"],
     "autoload": {
         "psr-4": {
             "Blendle\\": "src/Blendle"
         }
     },
-  	"require": {
+    "require": {
         "guzzlehttp/guzzle": "4.*"
     }
 }
