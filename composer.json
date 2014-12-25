@@ -9,6 +9,6 @@
         }
     },
     "require": {
-        "guzzlehttp/guzzle": "4.*"
+        "guzzlehttp/guzzle": "5.*"
     }
 }
