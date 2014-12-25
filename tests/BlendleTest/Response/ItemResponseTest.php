@@ -19,7 +19,7 @@ class ItemResponseTest extends TestCase
         $this->assertEquals($json['price'], '0.19');
     }
 
-	public function testItemModelResponse()
+    public function testItemModelResponse()
     {
         $json 		= 	file_get_contents(__DIR__.'\bnl-nn-20140801-1405555.json');
         $response 	= 	new \GuzzleHttp\Message\Response(200, [], \GuzzleHttp\Stream\Stream::factory($json));
