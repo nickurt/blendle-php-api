@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class UserPostsTest extends TestCase
 {
-	public function testInvalidUserPostsRequest() {
+	public function testInvalidUserPostsRequest()
+	{
 		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 
 		$request 		=	new \Blendle\Request\UserPostsRequest();

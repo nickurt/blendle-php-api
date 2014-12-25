@@ -82,6 +82,7 @@ class User {
 	public function setId($id) 
 	{
 		$this->id = $id;
+		return $this;
 	}
 
 	/**
@@ -90,6 +91,7 @@ class User {
 	public function setUsername($username) 
 	{
 		$this->username = $username;
+		return $this;
 	}
 
 	/**
@@ -98,6 +100,7 @@ class User {
 	public function setFollowers($followers) 
 	{
 		$this->followers = $followers;
+		return $this;
 	}
 
 	/**
@@ -106,6 +109,7 @@ class User {
 	public function setFollows($follows) 
 	{
 		$this->follows = $follows;
+		return $this;
 	}
 
 	/**
@@ -114,6 +118,7 @@ class User {
 	public function setPosts($posts) 
 	{
 		$this->posts = $posts;
+		return $this;
 	}
 
 	/**
@@ -122,6 +127,7 @@ class User {
 	public function setReads($reads) 
 	{
 		$this->reads = $reads;
+		return $this;
 	}
 
 	/**
@@ -130,6 +136,7 @@ class User {
 	public function setText($text) 
 	{
 		$this->text = $text;
+		return $this;
 	}
 
 	/**
@@ -138,5 +145,6 @@ class User {
 	public function setVerified($verified) 
 	{
 		$this->verified = $verified;
+		return $this;
 	}
 }

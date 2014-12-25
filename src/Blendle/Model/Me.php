@@ -145,6 +145,7 @@ class Me {
 	public function setId($id) 
 	{
 		$this->id = $id;
+		return $this;
 	}
 
 	/**
@@ -153,6 +154,7 @@ class Me {
 	public function setUsername($username) 
 	{
 		$this->username = $username;
+		return $this;
 	}
 
 	/**
@@ -161,6 +163,7 @@ class Me {
 	public function setEmail($email) 
 	{
 		$this->email = $email;
+		return $this;
 	}
 
 	/**
@@ -169,6 +172,7 @@ class Me {
 	public function setEmailConfirmed($email_confirmed) 
 	{
 		$this->email_confirmed = $email_confirmed;
+		return $this;
 	}
 
 	/**
@@ -177,6 +181,7 @@ class Me {
 	public function setFacebookId($facebook_id) 
 	{
 		$this->facebook_id = $facebook_id;
+		return $this;
 	}
 
 	/**
@@ -185,6 +190,7 @@ class Me {
 	public function setFollowers($followers) 
 	{
 		$this->followers = $followers;
+		return $this;
 	}
 
 	/**
@@ -193,6 +199,7 @@ class Me {
 	public function setFollowersOptOut($followers_opt_out) 
 	{
 		$this->followers_opt_out = $followers_opt_out;
+		return $this;
 	}
 
 	/**
@@ -201,6 +208,7 @@ class Me {
 	public function setFollows($follows) 
 	{
 		$this->follows = $follows;
+		return $this;
 	}
 
 	/**
@@ -209,6 +217,7 @@ class Me {
 	public function setMixpanelOptOut($mixpanel_opt_out) 
 	{
 		$this->mixpanel_opt_out = $mixpanel_opt_out;
+		return $this;
 	}
 
 	/**
@@ -217,6 +226,7 @@ class Me {
 	public function setNrcEmailShare($nrc_email_share) 
 	{
 		$this->nrc_email_share = $nrc_email_share;
+		return $this;
 	}
 
 	/**
@@ -225,6 +235,7 @@ class Me {
 	public function setPosts($posts) 
 	{
 		$this->posts = $posts;
+		return $this;
 	}
 
 	/**
@@ -233,6 +244,7 @@ class Me {
 	public function setReads($reads) 
 	{
 		$this->reads = $reads;
+		return $this;
 	}
 
 	/**
@@ -241,6 +253,7 @@ class Me {
 	public function setText($text) 
 	{
 		$this->text = $text;
+		return $this;
 	}
 
 	/**
@@ -249,6 +262,7 @@ class Me {
 	public function setUnconfirmedUid($unconfirmed_uid) 
 	{
 		$this->unconfirmed_uid = $unconfirmed_uid;
+		return $this;
 	}
 
 	/**
@@ -257,5 +271,6 @@ class Me {
 	public function setVerified($verified) 
 	{
 		$this->verified = $verified;
+		return $this;
 	}
 }

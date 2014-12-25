@@ -126,7 +126,6 @@ foreach($response->getItem() as $items) {
 }
 ```
 
-
 ### StandardBlendleOptions
 ```php
 <?php
@@ -136,6 +135,11 @@ $options		=	new \Blendle\Options\StandardBlendleOptions();
 $options->setBaseUrl('https://internal.blendle.nl');
 $options->setMeUrl('https://internal.blendle.nl/me');
 $options->setTokensUrl('https://internal.blendle.nl/tokens');
+```
+- - - 
+### Tests?
+```
+bin/phpunit nickurt/blendle/tests
 ```
 - - - 
 Thanks to [Blendle](https://blendle.nl)

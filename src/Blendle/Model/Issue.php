@@ -13,6 +13,7 @@ class Issue {
 	public function setItem(\Blendle\Model\Item $item) 
 	{
 		$this->items[] = $item;
+		return $this;
 	}
 
 	public function getItem() 

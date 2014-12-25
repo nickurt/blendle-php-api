@@ -3,8 +3,8 @@ namespace Blendle\Request;
 
 class RealtimeRequest implements RequestInterface
 {
-	protected $page  	=	1;
-	protected $amount	= 	10;
+	protected $page = 1;
+	protected $amount = 10;
 	
 	/**
 	 * getPage

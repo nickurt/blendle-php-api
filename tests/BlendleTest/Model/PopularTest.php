@@ -7,25 +7,28 @@ use PHPUnit_Framework_TestCase as TestCase;
 class PopularTest extends TestCase
 {
 	/**
-     * @expectedException \Blendle\Exception\InvalidArgumentException
-     */
-	public function testInvalidPopularAmount() {
-		$client     	= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+	 * @expectedException \Blendle\Exception\InvalidArgumentException
+	 */
+	public function testInvalidPopularAmount()
+	{
+		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 		$request 		=	new \Blendle\Request\PopularRequest();
 		$request->setAmount('10');
 	}
 
 	/**
-     * @expectedException \Blendle\Exception\InvalidArgumentException
-     */
-	public function testInvalidPopularPage() {
-		$client     	= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+	 * @expectedException \Blendle\Exception\InvalidArgumentException
+	 */
+	public function testInvalidPopularPage()
+	{
+		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 		$request 		=	new \Blendle\Request\PopularRequest();
 		$request->setPage('1');
 	}
 
-	public function testCustomPopularSettings() {
-		$client     	= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
+	public function testCustomPopularSettings()
+	{
+		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 		$request 		=	new \Blendle\Request\PopularRequest();
 		
 		$request->setPage(2);

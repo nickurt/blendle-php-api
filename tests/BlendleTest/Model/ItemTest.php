@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class ItemTest extends TestCase
 {
-	public function testSetItemRequest() {
+	public function testSetItemRequest()
+	{
 		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 
 		$item			=	new \Blendle\Model\Item();
@@ -19,7 +20,8 @@ class ItemTest extends TestCase
 		$this->assertNull($request->getAuthorization());
 	}
 
-	public function testSetAuthorizationItemRequest() {
+	public function testSetAuthorizationItemRequest()
+	{
 		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 
 		$item			=	new \Blendle\Model\Item();
@@ -32,7 +34,8 @@ class ItemTest extends TestCase
 		$this->assertContainsOnlyInstancesOf('\Blendle\Model\Authorization', array($request->getAuthorization()));
 	}
 
-	public function testSetAuthorizationWithTokenItemRequest() {
+	public function testSetAuthorizationWithTokenItemRequest()
+	{
 		$client 		= 	new \Blendle\Client\StandardClient(new \Blendle\Options\StandardBlendleOptions());
 
 		$item			=	new \Blendle\Model\Item();

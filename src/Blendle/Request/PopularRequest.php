@@ -3,8 +3,8 @@ namespace Blendle\Request;
 
 class PopularRequest implements RequestInterface
 {
-	protected $amount 	= 	10;
-	protected $page 	=	1;
+	protected $amount = 10;
+	protected $page = 1;
 
 	public function setAmount($amount) 
 	{
