@@ -7,19 +7,22 @@ use Blendle\Options\StandardBlendleOptions;
 
 class StandardOptionsTest extends TestCase
 {
-    public function testStandardBlendleOptions() {
-	    $options = new StandardBlendleOptions();
+	public function testStandardBlendleOptions()
+	{
+		$options = new StandardBlendleOptions();
 	}
 
 	/**
-     * @expectedException \Blendle\Exception\MalformedUrlException
-     */
-	public function testMalformedUrlExceptionStandardBlendleOptions() {
+	 * @expectedException \Blendle\Exception\MalformedUrlException
+	 */
+	public function testMalformedUrlExceptionStandardBlendleOptions()
+	{
 		$client = new StandardBlendleOptions();
 	   	$client->setBaseUrl('/dev/null');
 	}
 
-	public function testGetStandardBlendleOptionsTokensUrl() {
+	public function testGetStandardBlendleOptionsTokensUrl()
+	{
 		$client = new StandardBlendleOptions();
 
 	   	$this->assertEquals('https://ws.blendle.nl', $client->getBaseUrl());
@@ -33,7 +36,8 @@ class StandardOptionsTest extends TestCase
 	  	$this->assertEquals('https://ws.blendle.nl/user/%s/posts', $client->getUserPostsUrl());
 	}
 
-	public function testSetStandardBlendleOptionsTokensUrl() {
+	public function testSetStandardBlendleOptionsTokensUrl()
+	{
 		$client = new StandardBlendleOptions();
 
 		$client->setBaseUrl('https://internal.blendle.nl');

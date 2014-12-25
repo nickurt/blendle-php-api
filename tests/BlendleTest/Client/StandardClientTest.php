@@ -8,8 +8,8 @@ use Blendle\Options\StandardBlendleOptions;
 
 class StandardClientTest extends TestCase
 {
-    public function testStandardClient()
-    {
+	public function testStandardClient()
+	{
 		$client = new StandardClient(new StandardBlendleOptions());
 	}
 }
