@@ -223,7 +223,7 @@ class StandardClient {
 
         // Set the Token in the cookie and remove the old one
         $authorization->removeTokenCookie();
-        $authorization->setTokenCookie($response->token);
+        $authorization->setTokenCookie($response['token']);
 
         return $authorization;
     }
@@ -243,7 +243,7 @@ class StandardClient {
 
     	// Request
     	$response = $this->getRequest( $request );
-    	
+
     	// User
     	$user = new \Blendle\Model\Me();
     	$user->setId($response['id']);
